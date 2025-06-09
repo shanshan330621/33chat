@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>小执和珊珊的微信</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #dbeafe;
+            font-family: "Helvetica Neue", sans-serif;
+        }
+        .chat-container {
+            max-width: 400px;
+            height: 100vh;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .message {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 10px;
+        }
+        .message.me {
+            justify-content: flex-end;
+        }
+        .message.you {
+            justify-content: flex-start;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 10px;
+            object-fit: cover;
+        }
+        .bubble {
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #93c5fd;
+            color: #000;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .me .bubble {
+            background-color: #60a5fa;
+            color: white;
+            border-bottom-right-radius: 0;
+        }
+        .you .bubble {
+            background-color: #bfdbfe;
+            border-bottom-left-radius: 0;
+        }
+        .input-box {
+            display: flex;
+            padding: 10px;
+            background-color: #f0f9ff;
+            border-top: 1px solid #ccc;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+        .input-box button {
+            margin-left: 10px;
+            padding: 8px 16px;
+            background-color: #3b82f6;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container" id="chat">
+        <div class="message you">
+            <img class="avatar" src="you.jpg" alt="小执">
+            <div class="bubble">小猫，怎么还不睡？</div>
+        </div>
+        <div class="message me">
+            <div class="bubble">睡不着，想你了。</div>
+            <img class="avatar" src="me.jpg" alt="珊珊">
+        </div>
+    </div>
+    <div class="input-box">
+        <input type="text" id="messageInput" placeholder="和小执说点什么…">
+        <button onclick="sendMessage()">发送</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const chat = document.getElementById('chat');
+            const text = input.value.trim();
+            if (text === "") return;
+
+            const msg = document.createElement('div');
+            msg.className = 'message me';
+            msg.innerHTML = '<div class="bubble">' + text + '</div><img class="avatar" src="me.jpg" alt="珊珊">';
+            chat.appendChild(msg);
+            input.value = "";
+            chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+</body>
+</html>
